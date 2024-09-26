@@ -1,0 +1,354 @@
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/element/element.css">
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/common.css">
+<style>
+    #indexPage {
+        color: #444;
+        background: #fff;
+        padding: 0 20px 30px;
+    }
+
+    .create-btn {
+        width: 110px;
+        margin-right: 20px;
+    }
+
+    .export-btn {
+        width: 110px;
+        margin-right: 20px;
+    }
+
+    .delete-btn {
+        width: 88px;
+        height: 32px;
+        border: 1px solid #E6E6E6;
+        border-radius: 4px;
+        color: #999;
+        font-size: 13px;
+        justify-content: center;
+        margin-right: 20px;
+    }
+
+    .delete-btn-active {
+        color: #FF5959;
+        border-color: #FF5959;
+    }
+
+    .el-input__inner,
+    .el-input__icon {
+        height: 32px;
+        line-height: 32px;
+
+    }
+    .arrow-close i {
+        animation-iteration-count: infinite;
+        transform: rotateZ(0deg);
+    }
+
+    .arrow-close {
+        width: 36px;
+        height: 32px;
+        margin-left: 20px;
+        background: #7438D5;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .arrow-open {
+        width: 36px;
+        height: 32px;
+        margin-left: 20px;
+        background: #fff;
+        border-radius: 4px;
+        color: #7438D5;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #7438D5;
+
+    }
+    .arrow-close .arrow-container {
+        transform: rotateZ(0deg);
+        transition: transform .25s linear;
+    }
+
+    .arrow-open .arrow-container {
+        transform: rotateZ(180deg);
+        transition: transform .25s linear;
+    }
+    .screen-container-right {
+        margin-top: 14px;
+        margin-bottom: 14px;
+        flex-wrap: nowrap;
+    }
+    .order-time {
+        padding: 0 6px;
+        height: 32px;
+        border: 1px solid #DCDFE6;
+        border-radius: 4px 0px 0px 4px;
+        border-right: none;
+        flex-shrink: 0;
+    }
+    .color-666 {
+        color: #666;
+    }
+
+    .header-input-item,
+    .header-button-item {
+        margin-right: 30px;
+        margin-bottom: 14px;
+        width: 252px;
+    }
+
+    .header-select-item .el-select {
+        width: 100px;
+    }
+
+    .header-input-item .header-input-tip {
+        margin-right: 14px;
+    }
+
+    .header-input-item .el-input {
+        width: 176px;
+    }
+    .display-flex {
+        display: flex;
+        align-items: center;
+    }
+    .screen-con {
+        display: flex;
+        flex-wrap: wrap;
+        /* margin-top: 20px; */
+    }
+    .common-btn {
+        width: 80px;
+        line-height: 28px;
+        height: 30px;
+        border: 1px solid #DCDFE6;
+        border-radius: 4px;
+        color: #666;
+        text-align: center;
+        cursor: pointer;
+    }
+    .header-button-select {
+        background: #7536D0;
+        color: #fff;
+        margin-left: 20px;
+    }
+
+    [v-cloak] {
+        display: none
+    }
+</style>
+<script src="__CDN__/assets/addons/drama/libs/vue.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/element/element.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/moment.js"></script>
+<div id="indexPage" v-cloak>
+    <div class="custom-table">
+        <div class="custom-table-header display-flex-b">
+            <div class="display-flex" style="margin-top: 14px;flex-wrap: nowrap;">
+                <div class="custom-refresh display-flex-c" @click="getData(0,10)">
+                    <i class="el-icon-refresh"></i>
+                </div>
+                {if condition = "$auth->check('drama/cryptocard/add')"}
+                <div class="create-btn display-flex-c" @click="operation('create')">
+                    <i class="el-icon-plus"></i>
+                    <span>新建卡密</span>
+                </div>
+                {/if}
+                {if condition = "$auth->check('drama/cryptocard/del')"}
+                <div class="delete-btn cursor-pointer display-flex"
+                    :class="multipleSelection.length>0?'delete-btn-active':'' " @click="operation('del')">
+                    删除
+                </div>
+                {/if}
+
+            </div>
+            {if condition = "$auth->check('drama/cryptocard/recyclebin')"}
+            <div class="recycle-btn display-flex-c" @click="operation('recyclebin')">
+                <i class="fa fa-recycle"></i>
+                回收站
+            </div>
+            {/if}
+        </div>
+        <div class="screen-container-right display-flex">
+            <div class="display-flex margin-right-20">
+                <el-radio-group v-model="searchForm.type" @change="getData(0,10)" fill="#7536D0">
+                    <el-radio-button label="all">全部</el-radio-button>
+                    <el-radio-button label="usable">剧场积分套餐</el-radio-button>
+                    <el-radio-button label="reseller">分销商套餐</el-radio-button>
+                    <el-radio-button label="vip">VIP套餐</el-radio-button>
+                </el-radio-group>
+            </div>
+            <div class="display-flex margin-right-20" style="margin-left: 14px;flex-wrap: nowrap;">
+                <div class="color-666 order-time">创建时间</div>
+                <el-date-picker v-model="searchForm.createtime" type="daterange" value-format="yyyy-MM-dd HH:mm:ss"
+                                format="yyyy-MM-dd HH:mm:ss" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+                                @change="getData(0,10)" align="right" size="small"
+                                :default-time="['00:00:00', '23:59:59']">
+                </el-date-picker>
+            </div>
+            {if condition = "$auth->check('drama/cryptocard/export')"}
+            <div class="common-btn cursor-pointer screen-button" style="margin-left: 14px;flex-wrap: nowrap;" @click="goExport">卡密导出</div>
+            {/if}
+            <div :class="screenType?'arrow-open':'arrow-close'" @click="changeSwitch">
+                <div class="arrow-container">
+                    <i class="el-icon-arrow-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <el-collapse-transition>
+            <div class="screen-con" v-if="screenType">
+                <div class="display-flex header-input-item">
+                    <div class="header-input-tip">卡密套餐</div>
+                    <el-select v-model="searchForm.item_id" placeholder="请选择套餐" size="small">
+                        <el-option :label="platform.title" :value="platform.id"
+                                   v-for="platform in screenList">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div class="display-flex header-input-item">
+                    <div class="header-input-tip">卡密名称</div>
+                    <el-input placeholder="请输入卡密名称" v-model="searchForm.name" size="small"></el-input>
+                </div>
+                <div class="display-flex header-input-item">
+                    <div class="header-input-tip">卡密备注</div>
+                    <el-input placeholder="请输入卡密备注" v-model="searchForm.remark" size="small"></el-input>
+                </div>
+                <div class="display-flex header-input-item">
+                    <div class="header-input-tip">卡密状态</div>
+                    <el-select v-model="searchForm.status" placeholder="请选择状态" size="small">
+                        <el-option label="全部" value=""></el-option>
+                        <el-option label="未使用" value=0></el-option>
+                        <el-option label="已使用" value=1></el-option>
+                    </el-select>
+                </div>
+                <div class="header-button-item display-flex">
+                    <div class="common-btn" @click="screenEmpty">重置</div>
+                    <div class="common-btn header-button-select" @click="getData(0,10)">筛选</div>
+                </div>
+            </div>
+        </el-collapse-transition>
+
+
+        <div>
+            <el-table ref="multipleTable" :data="data" tooltip-effect="dark" style="width: 100%" border
+                @selection-change="handleSelectionChange" :row-class-name="tableRowClassName"
+                :cell-class-name="tableCellClassName" :header-cell-class-name="tableCellClassName"
+                @row-dblclick="operation">
+                <el-table-column type="selection" min-width="40">
+                </el-table-column>
+                <el-table-column label="ID" min-width="60" prop="id">
+                </el-table-column>
+                <el-table-column label="卡密类型" min-width="100">
+                    <template slot-scope="scope">
+                        <div>
+                            {{scope.row.type_text}}
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="卡密名称" min-width="100">
+                    <template slot-scope="scope">
+                        <div class="ellipsis-item">
+                            {{scope.row.name}}
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="卡密" min-width="150">
+                    <template slot-scope="scope">
+                        <div class="ellipsis-item">
+                            {{scope.row.pwd}}
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="卡密套餐" min-width="100">
+                    <template slot-scope="scope">
+                        <div>
+                            {{scope.row.item_title}}
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="卡密状态" min-width="100">
+                    <template slot-scope="scope">
+                        <div>
+                            {{scope.row.status_text}}
+                        </div>
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="兑换用户" min-width="100">
+                    <template slot-scope="scope">
+                        <div v-if="scope.row.user_cryptocard">
+                            <el-popover placement="bottom" width="200" height="80" trigger="hover">
+                                <div class="popover-item-1 display-flex">
+                                    <span class="popover-item-left">用户头像</span><span>:</span>
+                                    <img class="margin-left-10" style="width:26px;
+                                height:26px;
+                                border-radius:50%;" :src="Fast.api.cdnurl(scope.row.user_cryptocard.avatar)">
+                                </div>
+                                <div class="popover-item-1 display-flex">
+                                    <span class="popover-item-left">用户ID</span><span>:</span>
+                                    <span style="height: 24px;line-height: 24px;" class="margin-left-10">{{scope.row.user_cryptocard?scope.row.user_cryptocard.user_id:''}}</span>
+                                </div>
+                                <div v-if="scope.row.user_cryptocard && scope.row.user_cryptocard.mobile"
+                                     class="popover-item-1 display-flex"><span
+                                        class="popover-item-left">用户手机号</span><span>:</span><span
+                                        class="margin-left-10">
+                                            {{scope.row.user_cryptocard.mobile}}</span>
+                                </div>
+                                <div v-if="scope.row.user_cryptocard && scope.row.user_cryptocard.type_text"
+                                     class="popover-item-1 display-flex"><span
+                                        class="popover-item-left">订单类型</span><span>:</span><span
+                                        class="margin-left-10">
+                                            {{scope.row.user_cryptocard.type_text}}</span>
+                                </div>
+                                <div v-if="scope.row.user_cryptocard && scope.row.user_cryptocard.order_id"
+                                     class="popover-item-1 display-flex"><span
+                                        class="popover-item-left">套餐订单ID</span><span>:</span><span
+                                        class="margin-left-10">
+                                            {{scope.row.user_cryptocard.order_id}}</span>
+                                </div>
+                                <div v-if="scope.row.user_cryptocard && scope.row.user_cryptocard.cratetime"
+                                     class="popover-item-1 display-flex"><span
+                                        class="popover-item-left">兑换时间</span><span>:</span><span
+                                        class="margin-left-10">
+                                            {{scope.row.user_cryptocard.cratetime}}</span>
+                                </div>
+                                <el-button type="text" slot="reference">
+                                    <div class="ellipsis-item" style="border-bottom: 1px solid #7438D5;color: #7438D5;" v-if="scope.row.user_cryptocard && scope.row.user_cryptocard.nickname">
+                                        {{scope.row.user_cryptocard.nickname}}
+                                    </div>
+                                </el-button>
+                            </el-popover>
+                        </div>
+                        <div style="color: #F56C6C;" v-else>-</div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="remark" label="备注" min-width="100">
+                </el-table-column>
+                <el-table-column prop="usetime" label="有效期" min-width="300">
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" min-width="60">
+                    <template slot-scope="scope">
+                        {if condition = "$auth->check('drama/cryptocard/del')"}
+                        <span class="table-delete-text" @click="operation('del',scope.row.id)">删除</span>
+                        {/if}
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div class="pagination-container display-flex">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="limit"
+                layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
+            </el-pagination>
+        </div>
+    </div>
+
+</div>
+</div>

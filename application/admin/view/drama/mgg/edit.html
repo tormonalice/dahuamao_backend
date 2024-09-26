@@ -1,0 +1,111 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">道具ID:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-product_id" class="form-control" name="row[product_id]" type="text" value="{$row.product_id|htmlentities}">
+            <br>
+            <span style="color: red;">使用小程序虚拟支付时必须设置，请填写英文字符、下划线、数字，不超过20位，将作为唯一标识符，不能与其他道具ID重复</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-image" data-rule="required" class="form-control" size="50" name="row[image]" type="text" value="{$row.image|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="faupload-image" class="btn btn-danger faupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-image"></span>
+            </div>
+            <ul class="row list-inline faupload-preview" id="p-image"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Price')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-price" data-rule="required" class="form-control" name="row[price]" type="number" value="{$row.price|htmlentities}">
+        </div>
+    </div>
+    <!--
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Original_price')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-original_price" data-rule="required" class="form-control" step="0.01" name="row[original_price]" type="number" value="{$row.original_price|htmlentities}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('等级')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-level" data-rule="required;min:1" class="form-control" step="1" name="row[level]" type="number" value="{$row.level|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Expire')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group pull-left">
+                <input type="text" class="form-control" data-rule="required" id="c-expire" name="row[expire]" value="{$row.expire|htmlentities}" data-tip="{:__('输入有效期前请先选择单位')}"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">{:__('Choose')}</button>
+                    <input type="hidden" id="c-expire_type" name="row[expire_type]" value="{$row.expire_type|htmlentities}">
+                    <ul class="dropdown-menu pull-right rulelist">
+                        <li class="{if $row.expire_type == 'day'}active{/if}"><a href="javascript:;" data-value="day">天<span class="text-muted">(day)</span></a></li>
+                        <li class="{if $row.expire_type == 'month'}active{/if}"><a href="javascript:;" data-value="month">月<span class="text-muted">(month)</span></a></li>
+                        <li class="{if $row.expire_type == 'year'}active{/if}"><a href="javascript:;" data-value="year">年<span class="text-muted">(year)</span></a></li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
+        <div class="col-xs-12 col-sm-8">
+
+            <dl class="fieldlist" data-name="row[content]">
+                <dd>
+                    <ins>{:__('Key')}</ins>
+                    <ins>{:__('Value')}</ins>
+                </dd>
+                <dd><a href="javascript:;" class="btn btn-sm btn-success btn-append"><i class="fa fa-plus"></i> {:__('Append')}</a></dd>
+                <textarea name="row[content]" class="form-control hide" cols="30" rows="5">{$row.content|htmlentities}</textarea>
+            </dl>
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" data-rule="required" class="form-control" name="row[weigh]" type="number" value="{$row.weigh|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            
+            <div class="radio">
+            {foreach name="statusList" item="vo"}
+            <label for="row[status]-{$key}"><input id="row[status]-{$key}" name="row[status]" type="radio" value="{$key}" {in name="key" value="$row.status"}checked{/in} /> {$vo}</label> 
+            {/foreach}
+            </div>
+
+        </div>
+    </div>
+    -->
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

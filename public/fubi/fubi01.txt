@@ -1,0 +1,84 @@
+{
+    "code": 1,
+    "msg": "初始化数据",
+    "time": "1727339920",
+    "data": {
+        "system": {
+            "name": "",
+            "domain": "http:\/\/172.105.5.248\/pc\/",
+            "h5": "http:\/\/172.105.5.248\/h5\/",
+            "h5_theme": "default",
+            "version": "1.6.1",
+            "logo": "https:\/\/dahuamao.p6688.top",
+            "company": "https:\/\/dahuamao.p6688.top",
+            "copyright": [],
+            "mobile_switch": "1",
+            "android_autoplay": "",
+            "mobile": "",
+            "email": "",
+            "wechat": "",
+            "user_protocol": "",
+            "privacy_protocol": "",
+            "about_us": "",
+            "contact_us": "",
+            "legal_notice": "",
+            "usable_desc": "",
+            "vip_desc": "",
+            "reseller_desc": "",
+            "jfname": "",
+            "jfimage": "https:\/\/dahuamao.p6688.top\/public\/assets\/img\/jifen.png",
+            "jfimage_arr": "",
+            "kf_switch": "0",
+            "kfyd": "",
+            "kfyd_arr": "",
+            "kftc": "",
+            "kftc_arr": ""
+        },
+        "share": {
+            "title": "",
+            "description": "",
+            "image": "https:\/\/dahuamao.p6688.top",
+            "user_poster_bg": "",
+            "user_poster_bg_color": "#6A62D1",
+            "msg_title_bg": "https:\/\/dahuamao.p6688.top",
+            "msg_title_bg_color": "#9C27B0"
+        },
+        "payment": [],
+        "user": [],
+        "category": [
+            {
+                "id": 3,
+                "site_id": 2,
+                "name": "视频分类",
+                "style": 1,
+                "type": "video",
+                "image": null,
+                "pid": 0,
+                "weigh": 0,
+                "description": ""
+            },
+            {
+                "id": 14,
+                "site_id": 2,
+                "name": "视频年份",
+                "style": 1,
+                "type": "year",
+                "image": null,
+                "pid": 0,
+                "weigh": 0,
+                "description": ""
+            },
+            {
+                "id": 24,
+                "site_id": 2,
+                "name": "视频地区",
+                "style": 1,
+                "type": "area",
+                "image": null,
+                "pid": 0,
+                "weigh": 0,
+                "description": ""
+            }
+        ]
+    }
+}

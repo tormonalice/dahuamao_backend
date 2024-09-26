@@ -1,0 +1,982 @@
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/element/element.css">
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/common.css">
+<style>
+    #videoIndex {
+        color: #444;
+    }
+
+    .el-pagination,
+    .el-pagination__total,
+    .el-input__inner,
+    .el-pagination__jump {
+        color: #444;
+    }
+
+    .agent-dialog.el-dialog {
+        width: fit-content !important;
+    }
+
+    .agent-dialog.el-dialog .el-dialog__body {
+        padding: 10px 20px;
+    }
+    .message-item {
+        margin-bottom: 14px;
+    }
+    .margin-right-20 {
+        margin-right: 20px;
+    }
+    .message-tip {
+        width: 120px;
+        /* margin-right: 20px; */
+        height: 34px;
+        line-height: 34px;
+        /* text-align: right; */
+        text-align: justify;
+        text-align-last: justify;
+    }
+    .message-con {
+        flex: 1;
+        justify-content: space-between;
+    }
+
+    .common-btn {
+        height: 32px;
+        cursor: pointer;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
+
+    .el-input__inner,
+    .el-input__icon {
+        line-height: 32px;
+        height: 32px;
+    }
+
+    .btn-box {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        justify-content: space-between;
+    }
+
+    .refresh-btn {
+        width: 32px;
+        border: 1px solid #E6E6E6;
+        font-size: 14px;
+        margin-right: 20px;
+    }
+
+    .create-video,
+    .add-params,
+    .add-level1-sku {
+        width: 98px;
+        background: #7536D0;
+        color: #fff;
+    }
+
+    .create-video {
+        margin-right: 20px;
+    }
+
+    .create-video span,
+    .add-params span,
+    .add-level1-sku span {
+        margin-left: 8px;
+    }
+
+    .video-name {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .video-img {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        border: 1px solid #e6e6e6;
+        flex-shrink: 0;
+    }
+
+    .el-table,
+    .el-table thead,
+    .el-table th {
+        color: #444;
+        font-weight: 500 !important;
+        font-size: 13px;
+    }
+
+    .display-flex {
+        display: flex;
+        align-items: center;
+    }
+
+
+    .label-auto {
+        width: 100%;
+        height: 100%;
+    }
+
+    .el-radio-button__inner,
+    .el-radio-button__inner:hover {
+        height: 32px;
+        line-height: 32px;
+        width: 80px;
+        text-align: center;
+        padding: 0;
+        color: #666;
+    }
+
+    .el-radio__input.is-checked+.el-radio__label,
+    .el-tabs__item.is-active,
+    .el-tabs__item:hover,
+    .el-pager li.active,
+    .el-select-dropdown__item.selected {
+        color: #7438D5;
+    }
+
+    .el-radio__input.is-checked .el-radio__inner,
+    .el-tabs__active-bar,
+    .el-checkbox__input.is-checked .el-checkbox__inner,
+    .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+        background: #7438D5;
+        border-color: #7438D5;
+    }
+
+    .one-ellipsis {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .sort-order {
+        margin-left: 6px;
+        color: #C0C4CC;
+        flex-direction: row-reverse;
+    }
+
+    .recycle-btn {
+        width: 88px;
+        color: #444;
+        border: #444 1px solid;
+    }
+
+    .recycle-btn i {
+        margin-right: 6px;
+        font-size: 14px;
+    }
+
+    .all-btn-up,
+    .all-btn-del,
+    .all-btn-up1 {
+        width: 60px;
+        border: 1px solid #E5E5E5;
+        margin-right: 20px;
+    }
+
+    .all-btn-up1:hover {
+        color: #7438D5;
+        border-color: #7438D5;
+    }
+
+    .all-btn-up:hover {
+        color: #50E3C2;
+        border-color: #50E3C2;
+    }
+
+    .all-btn-del:hover {
+        color: #FF5959;
+        border-color: #FF5959;
+    }
+
+    .status-box {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .status-btn {
+        width: 56px;
+        height: 26px;
+        border: 1px solid #7438D5;
+        color: #7438D5;
+        font-size: 12px;
+    }
+
+    .status-btn-2 {
+        color: #FF5959;
+        border-color: #FF5959;
+    }
+
+    .status-btn-3 {
+        color: #999;
+        border-color: #999;
+    }
+
+    .el-table th {
+        background: #F9F9F9;
+        padding: 7px 0;
+    }
+
+    .el-tabs__item {
+        width: 80px;
+        padding: 0;
+        padding-right: 20px;
+        text-align: center;
+        color: #666;
+    }
+
+    .el-tabs__nav-wrap::after {
+        height: 1px;
+    }
+
+    .icon-top {
+        margin-left: -5px;
+    }
+
+    .edit-text,
+    .copy-text,
+    .share-text,
+    .del-text {
+        cursor: pointer;
+        color: #444;
+    }
+
+    .share-text {
+        margin:0 14px;
+    }
+    .copy-text {
+        margin: 0 14px;
+    }
+
+    .edit-text:hover {
+        color: #7438D5;
+    }
+
+    .copy-text:hover {
+        color: #01CFA1;
+    }
+
+    .del-text:hover {
+        color: #FF5959;
+    }
+
+    .el-button--primary,
+    .el-button--primary:hover {
+        background: #7438D5 !important;
+        border-color: #7438D5 !important;
+        color: #fff;
+    }
+
+    .el-popover {
+        left: 46px;
+        top: 10px;
+    }
+
+    .choose-container {
+        margin-bottom: 10px;
+    }
+
+    .custom-choose,
+    .custom-choose-type,
+    .custom-choose-sub {
+        height: 50px;
+        border-radius: 4px;
+        justify-content: space-between;
+        padding: 0 20px;
+        background: #fff;
+    }
+
+    .custom-choose-type,
+    .custom-choose-sub {
+        justify-content: flex-start;
+    }
+
+    .custom-choose-sub {
+        height: 70px;
+        padding: 0 10px 20px 20px;
+    }
+
+    .choose-status-tip {
+        margin-right: 12px;
+    }
+
+    .custom-choose-type-tip {
+        margin-right: 16px;
+    }
+
+    .choose-btn {
+        width: 80px;
+        border: 1px solid #E6E6E6;
+        margin-right: 10px;
+        height: 30px;
+    }
+
+    .choose-btn-active {
+        background-color: #7536D0;
+        border: none;
+        color: #fff;
+    }
+
+    .choose-price {
+        width: 140px;
+    }
+
+    .choose-price-line {
+        margin: 0 14px;
+    }
+
+    .el-input-group__append,
+    .el-input-group__prepend {
+        width: 30px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .custom-table {
+        padding: 20px 20px 30px;
+        background: #fff;
+    }
+
+    .custom-header {
+        justify-content: space-between;
+        margin-bottom: 14px;
+    }
+
+    label {
+        margin-bottom: 0;
+    }
+
+    .custom-refresh {
+        width: 34px;
+        height: 32px;
+        border: 1px solid #E6E6E6;
+        font-size: 16px;
+        justify-content: center;
+        margin-right: 20px;
+        border-radius: 4px;
+    }
+
+    .page-container {
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    /* .el-table td,
+    .el-table th,
+    .el-table th.is-leaf {
+        border-color: #f7f7f7;
+        padding: 0;
+    } */
+
+    /* .el-table th .cell,
+    .el-table td .cell {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        line-height: 20px;
+        justify-content: center;
+    } */
+
+    /* .el-table th .cell {
+        height: 40px;
+    } */
+
+    .video-title {
+        margin-bottom: 4px;
+        width: 154px;
+        line-height: 14px;
+    }
+
+    .activity-type {
+        justify-content: space-around;
+    }
+
+    .activity-type-btn {
+        width: 40px;
+        height: 20px;
+        padding-top: 2px;
+        border-radius: 4px;
+        color: #fff;
+        justify-content: center;
+    }
+
+    .seckill-btn {
+        background: #FFF4F3;
+        border: 1px solid #FECAC4;
+        color: #FE9488;
+    }
+
+    .groupon-btn {
+        background: #F1EDFA;
+        border: 1px solid #CEBEEC;
+        color: #9C7EDA;
+    }
+
+    .score-btn {
+        background: #FDF5E8;
+        border: 1px solid #F8DCAE;
+        color: #F2BA5E;
+    }
+
+    .el-table .bg-color {
+        background: #f9f9f9;
+    }
+
+    .cell-left .cell {
+        justify-content: flex-start !important;
+    }
+
+    .el-table_1_column_11.is-leaf,
+    .el-table_1_column_11 {
+        border-color: #EBEEF5 !important;
+    }
+
+    .el-radio-button__inner {
+        font-size: 12px;
+    }
+
+    .el-table__fixed-right::before,
+    .el-table__fixed::before {
+        height: 0 !important;
+    }
+
+    .ellipsis-item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .el-table td,
+    .el-table th {
+        padding: 10px 0 9px;
+    }
+
+    .btn-import {
+        width: 98px;
+        color: #fff;
+        background: #f39c12;
+    }
+
+    [v-cloak] {
+        display: none
+    }
+</style>
+<script src="__CDN__/assets/addons/drama/libs/vue.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/element/element.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/Sortable.min.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/vuedraggable.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/moment.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/clipboard.min.js"></script>
+<div id="videoIndex" v-cloak v-loading="allAjax" @click.stop="hideup()">
+    <div class="choose-container">
+        <div class="custom-choose display-flex">
+            <div class="display-flex">
+                <div class="choose-status" style="margin-right: 24px;">
+                    <span class="choose-status-tip">筛选条件</span>
+                    <el-switch @change="isShoose" active-value="1" inactive-value="0" v-model="chooseType"
+                               active-color="#7536D0" inactive-color="#E9EBEF">
+                    </el-switch>
+                </div>
+                <!--
+                <div class="common-btn btn-import" style="margin-right: 12px;" @click="videoSync">
+                    <i class="el-icon-download"></i>
+                    <span>导入测试数据</span>
+                </div>
+                <div class="common-btn btn-import" style="margin-right: 12px;" @click="videoDownload">
+                    <i class="el-icon-download"></i>
+                    <span>下载剧集模板</span>
+                </div>
+                <div class="common-btn btn-import" style="margin-right: 12px;" @click="videoImport">
+                    <i class="el-icon-download"></i>
+                    <span>批量导入剧集</span>
+                </div>
+                <div class="common-btn btn-import" style="margin-right: 12px;" @click="videoAdd">
+                    <i class="el-icon-download"></i>
+                    <span>导入正版片源</span>
+                </div>
+                -->
+                <div class="common-btn btn-import" style="margin-right: 12px;width: 120px;" @click="tbXcx">
+                    <i class="el-icon-download"></i>
+                    <span>同步小程序媒资</span>
+                </div>
+            </div>
+            <div class="custom-search">
+                <el-input placeholder="请输入ID、标题、标签" suffix-icon="el-icon-search" v-model="searchKey">
+                </el-input>
+            </div>
+        </div>
+        <el-collapse-transition>
+            <div v-if="chooseType==1">
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        短剧分类
+                    </div>
+                    <div class="common-btn choose-btn" :class="categoryType=='all'?'choose-btn-active':''"
+                         @click="chooseOpt('category', 'all')">
+                        全部
+                    </div>
+                    <div class="common-btn choose-btn" v-for="(key, val) in categoryList" :class="categoryType==val?'choose-btn-active':''"
+                         @click="chooseOpt('category', val)">
+                        {{key}}
+                    </div>
+                </div>
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        短剧年份
+                    </div>
+                    <div class="common-btn choose-btn" :class="yearType=='all'?'choose-btn-active':''"
+                         @click="chooseOpt('year', 'all')">
+                        全部
+                    </div>
+                    <div class="common-btn choose-btn" v-for="(key, val) in yearList" :class="yearType==key.id?'choose-btn-active':''"
+                         @click="chooseOpt('year', key.id)">
+                        {{key.name}}
+                    </div>
+                </div>
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        短剧地区
+                    </div>
+                    <div class="common-btn choose-btn" :class="areaType=='all'?'choose-btn-active':''"
+                         @click="chooseOpt('area', 'all')">
+                        全部
+                    </div>
+                    <div class="common-btn choose-btn" v-for="(key, val) in areaList" :class="areaType==key.id?'choose-btn-active':''"
+                         @click="chooseOpt('area', key.id)">
+                        {{key.name}}
+                    </div>
+                </div>
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        短剧标志
+                    </div>
+                    <div class="common-btn choose-btn" :class="flagsType=='all'?'choose-btn-active':''"
+                         @click="chooseOpt('flags', 'all')">
+                        全部
+                    </div>
+                    <div class="common-btn choose-btn" v-for="(key, val) in flagsList" :class="flagsType==val?'choose-btn-active':''"
+                         @click="chooseOpt('flags', val)">
+                        {{key}}
+                    </div>
+                </div>
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        价格区间
+                    </div>
+                    <div class="choose-price">
+                        <el-input v-model="priceFrist">
+                            <template slot="append">积分</template>
+                        </el-input>
+                    </div>
+                    <div class="choose-price-line">
+                        -
+                    </div>
+                    <div class="choose-price">
+                        <el-input v-model="priceLast">
+                            <template slot="append">积分</template>
+                        </el-input>
+                    </div>
+                </div>
+                <div class="custom-choose-type display-flex">
+                    <div class="custom-choose-type-tip">
+                        VIP价格区间
+                    </div>
+                    <div class="choose-price">
+                        <el-input v-model="vpriceFrist">
+                            <template slot="append">积分</template>
+                        </el-input>
+                    </div>
+                    <div class="choose-price-line">
+                        -
+                    </div>
+                    <div class="choose-price">
+                        <el-input v-model="vpriceLast">
+                            <template slot="append">积分</template>
+                        </el-input>
+                    </div>
+                </div>
+                <div class="custom-choose-sub display-flex">
+                    <div class="common-btn choose-btn choose-btn-active" style="margin-right: 20px;"
+                         @click="videoOpt('filter')">
+                        筛选
+                    </div>
+                    <div class="common-btn choose-btn" @click="videoOpt('clear')">
+                        清空
+                    </div>
+                </div>
+            </div>
+        </el-collapse-transition>
+        <div class="custom-table" style="color: red;">
+            <p>注意：</p>
+            <p>1.此功能只针对已开通微信小程序【微短剧】分类的用户使用</p>
+            <p>2.需现在媒资管理界面上传您的媒资信息，然后再在这里同步即可</p>
+            <p>3.操作教程：https://doc.weixin.qq.com/doc/w3_AUgAVwZeAGcLiNH7y0rRxW7JYaUAx?scode=AEIAIgdXAAoiFOs7zk</p>
+        </div>
+    </div>
+    <div class="custom-table">
+        <div class="custom-header display-flex">
+            <div class="display-flex">
+                <div class="custom-refresh display-flex" @click="getData">
+                    <i class="el-icon-refresh"></i>
+                </div>
+                <!--
+                <div class="common-btn  create-video" @click="videoOpt('create')">
+                    <i class="el-icon-plus"></i>
+                    <span>新增短剧</span>
+                </div>
+                -->
+                <div class="common-btn  create-video" @click="openDialog">
+                    <i class="el-icon-edit"></i>
+                    <span>价格修改</span>
+                </div>
+                <div>
+                    <el-radio-group v-model="activeStatus" fill="#7536D0">
+                        <el-radio-button label="all">全部</el-radio-button>
+                        <el-radio-button label="up">已上架</el-radio-button>
+                        <el-radio-button label="down">已下架</el-radio-button>
+                    </el-radio-group>
+                </div>
+            </div>
+            <div class="common-btn  recycle-btn" @click="videoOpt('recycle')">
+                <i class="fa fa-recycle"></i>
+                回收站
+            </div>
+        </div>
+        <div v-loading="tableAjax">
+            <el-table ref="multipleTable" :data="videoData" tooltip-effect="dark" style="width: 100%" border
+                      @selection-change="handleSelectionChange" :row-class-name="tableRowClassName"
+                      :cell-class-name="tableCellClassName" :header-cell-class-name="tableCellClassName"
+                      @row-dblclick="videoOpt">
+                <el-table-column type="selection" min-width="36">
+                </el-table-column>
+                <el-table-column label="ID" prop="id" min-width="70">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>ID</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='id' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('id','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='id' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('id','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="短剧" min-width="330">
+                    <template slot-scope="scope">
+                        <div class="video-name">
+                            <div class="video-img">
+                                <el-image :src="Fast.api.cdnurl(scope.row.image)" fit="contain">
+                                    <div slot="error" class="image-slot">
+                                        <i class="el-icon-picture-outline"></i>
+                                    </div>
+                                </el-image>
+                            </div>
+                            <div>
+                                <div class="ellipsis-item" style="margin-top: 8px;line-height: 1;">
+                                    {{scope.row.title}}
+                                </div>
+                                <div class="display-flex" style="margin-top: 4px;">
+                                <!--    <span style="color: #444;margin-right: 12px;line-height: 20px;">-->
+                                <!--        {{scope.row.subtitle}}-->
+                                <!--    </span>-->
+                                </div>
+                                <div class="activity-type display-flex">
+                                    <div class="activity-tags full-activity-tag" v-for="flag in scope.row.flags_text_arr" v-if="flag">
+                                        {{flag}}
+                                    </div>
+                                    <div class="activity-tags groupon-activity-tag" v-for="category in scope.row.category_text_arr" v-if="category">
+                                        {{category}}
+                                    </div>
+                                    <div class="activity-tags seckill-activity-tag" v-if="scope.row.area_text">{{scope.row.area_text}}
+                                    </div>
+                                    <div class="activity-tags full-activity-tag" v-if="scope.row.year_text">{{scope.row.year_text}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="price" label="价格" min-width="90">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>价格</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='price' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('price','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='price' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('price','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="vprice" label="VIP价格" min-width="100">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>VIP价格</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='vprice' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('vprice','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='vprice' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('vprice','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="episodes" label="总集数" min-width="100">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>总集数</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='episodes' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('episodes','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='episodes' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('episodes','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="sales" label="销量" min-width="100">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>销量</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='sales' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('sales','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='sales' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('sales','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="views" label="播放量" min-width="90">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>播放量</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='views' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('views','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='views' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('views','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="likes" label="点赞量" min-width="90">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>点赞量</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='likes' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('likes','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='likes' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('likes','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="favorites" label="收藏量" min-width="100">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>收藏量</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='favorites' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('favorites','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='favorites' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('favorites','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="shares" label="转发量" min-width="100">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>转发量</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='shares' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('shares','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='shares' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('shares','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="xcx_sync" label="是否同步" min-width="150">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>是否同步</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='xcx_sync' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('xcx_sync','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='xcx_sync' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('xcx_sync','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                    <template slot-scope="scope">
+                        <span style="color:#FF5959" v-if="scope.row.xcx_sync==0">未同步</span>
+                        <span style="color:#7438D5" v-if="scope.row.xcx_sync==1">已同步</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="weigh" label="排序" min-width="80">
+                    <template slot="header" slot-scope="scope">
+                        <div class="display-flex">
+                            <div>排序</div>
+                            <div class="display-flex sort-order">
+                                <i class="el-icon-sort-up icon-top"
+                                   :style="{color:(sort=='weigh' && order=='asc')?'#7438d5':''}"
+                                   @click="sortOrder('weigh','asc')"></i>
+                                <i class="el-icon-sort-down icon-bottom"
+                                   :style="{color:(sort=='weigh' && order=='desc')?'#7438d5':''}"
+                                   @click="sortOrder('weigh','desc')"></i>
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="更新时间" min-width="148">
+                    <template slot-scope="scope">
+                        <div>
+                            {{moment(scope.row.updatetime*1000).format("YYYY-MM-DD HH:mm:ss")}}
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column fixed="right" label="操作" min-width="210">
+                    <template slot-scope="scope">
+                        <span slot="reference" style="cursor: pointer;margin-right: 12px;">
+                            <span style="color:#7438D5" @click="editStatus(scope.row.id,'down')"
+                                  v-if="scope.row.status=='up'">{{scope.row.status_text}}</span>
+                            <span style="color:#FF5959" @click="editStatus(scope.row.id,'up')"
+                                  v-if="scope.row.status=='down'">{{scope.row.status_text}}</span>
+                        </span>
+                        <span class="edit-text" @click="videoOpt('edit',scope.row.id)">编辑
+                        </span>
+                        <!--
+                        <span class="copy-text" @click="videoOpt('copy',scope.row.id)">复制
+                        </span>
+                        -->
+                        <span class="share-text" @click="copyMsg(scope.row.id)">分享
+                        </span>
+                        <span class="del-text" @click="videoOpt('del',scope.row.id)">删除</span>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div class="page-container display-flex">
+            <div class="display-flex">
+                <div class="common-btn  all-btn-up1" @click="videoOpt('up',null)" v-if="activeStatus!='up'">
+                    上架
+                </div>
+                <div class="common-btn  all-btn-up" @click="videoOpt('down',null)" v-if="activeStatus!='down'">
+                    下架
+                </div>
+                <div class="common-btn  all-btn-del" @click="videoOpt('del',null)">
+                    删除
+                </div>
+            </div>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                           :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="limit"
+                           layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
+            </el-pagination>
+        </div>
+    </div>
+    <el-dialog title="批量设置价格" :visible.sync="priceDialogVisible" :before-close="closeDialog" custom-class="agent-dialog">
+        <div>
+            <div class="message-item display-flex">
+                <div class="display-flex margin-right-20">
+                    <div class="message-tip">整剧普通用户价格</div>:
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="video_price" placeholder="不修改留空" style="width: 150px;" size="small">
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+            </div>
+            <div class="message-item display-flex">
+                <div class="display-flex margin-right-20">
+                    <div class="message-tip">单集普通用户价格</div>:
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_top" size="small" style="width: 150px;">
+                        <template slot="prepend">前</template>
+                        <template slot="append">集</template>
+                    </el-input>
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_price" style="width: 120px;" size="small">
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+                <div class="message-con display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_price_last" placeholder="不修改留空" size="small" style="width: 150px;">
+                        <template slot="prepend">其余</template>
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+            </div>
+
+            <div class="message-item display-flex" v-if="vpriceFreeChecked == false">
+                <div class="display-flex margin-right-20">
+                    <div class="message-tip">整剧VIP用户价格</div>:
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="video_vprice" placeholder="不修改留空" style="width: 150px;" size="small">
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+            </div>
+            <div class="message-item display-flex" v-if="vpriceFreeChecked == false">
+                <div class="display-flex margin-right-20">
+                    <div class="message-tip">单集VIP用户价格</div>:
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_top_vip" size="small" style="width: 150px;">
+                        <template slot="prepend">前</template>
+                        <template slot="append">集</template>
+                    </el-input>
+                </div>
+                <div class="display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_vprice" style="width: 120px;" size="small">
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+                <div class="message-con display-flex margin-right-20">
+                    <el-input type="number" min="0" v-model="episode_vprice_last" placeholder="不修改留空" size="small" style="width: 150px;">
+                        <template slot="prepend">其余</template>
+                        <template slot="append">积分</template>
+                    </el-input>
+                </div>
+            </div>
+        </div>
+        <span slot="footer" style="display: flex;align-items: center;justify-content: space-between;">
+            <el-checkbox v-model="vpriceFreeChecked" @change="initVpriceData">VIP用户免费看剧</el-checkbox>
+            <div>
+                <el-button style="margin-right: 10px;" @click="closeDialog" size="mini" type="text">取 消</el-button>
+                <el-button type="primary" size="small" @click="closeDialog(true)">确 定</el-button>
+            </div>
+        </span>
+    </el-dialog>
+
+</div>

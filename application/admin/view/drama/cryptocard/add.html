@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/element/element.css">
+<link rel="stylesheet" href="__CDN__/assets/addons/drama/libs/common.css">
+<style>
+    #pageDetail {
+        background: #fff;
+        overflow: auto;
+        color: #666;
+    }
+
+    .msg-tip {
+        margin-left: 30px;
+        color: #999;
+    }
+
+    .select-goods {
+        width: 146px;
+        height: 50px;
+        border: 1px solid #E6E6E6;
+        border-radius: 4px;
+        margin-right: 10px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .select-goods-selected {
+        border-color: #7438D5;
+    }
+
+    .select-goods-img {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+    }
+
+    .select-goods div {
+        padding: 0 8px;
+        line-height: 14px;
+        -webkit-line-clamp: 2;
+        font-size: 12px;
+    }
+
+    .delete-goods {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: -8px;
+        right: -8px;
+
+    }
+
+    .label-auto {
+        width: 16px;
+        height: 16px;
+    }
+
+    .modify-text {
+        margin-right: 14px;
+    }
+
+    [v-cloak] {
+        display: none
+    }
+</style>
+<script src="__CDN__/assets/addons/drama/libs/vue.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/element/element.js"></script>
+<script src="__CDN__/assets/addons/drama/libs/moment.js"></script>
+<div id="pageDetail" v-cloak>
+    <el-form :model="detailData" :rules="rules" ref="detailData" label-width="108px" class="detail-form">
+        <el-form-item label="卡密名称：" prop="name">
+            <div class="display-flex">
+                <el-input type="input" v-model="detailData.name" placeholder="请输入卡密名称"></el-input>
+            </div>
+        </el-form-item>
+        <el-form-item label="套餐类型：" prop="type">
+            <el-radio-group v-model="detailData.type" @change="operation()">
+                <el-radio label="vip">VIP套餐</el-radio>
+                 <el-radio label="reseller">分销商套餐</el-radio>
+                 <el-radio label="usable">剧场积分套餐</el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="卡密套餐：" prop="item_id">
+            <div class="display-flex">
+                <div style="flex: 1;">
+                    <el-select style="position: relative;" v-model="detailData.item_id">
+                        <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id">
+                            <div class="display-flex">
+                                <div class="ellipsis-1" style="width: 60px;" >{{ item.id }}</div>
+                                <div class="ellipsis-1" style="width: 100px;" v-if="detailData.type != 'reseller'">{{ item.title }}</div>
+                                <div class="ellipsis-1" style="width: 100px;" v-if="detailData.type == 'reseller'">{{ item.name }}</div>
+                            </div>
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
+        </el-form-item>
+        <el-form-item label="使用时间：" prop="usetime">
+            <el-date-picker v-model="detailData.usetime" type="datetimerange" range-separator="至"
+                value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd HH:mm:ss" start-placeholder="开始日期"
+                end-placeholder="结束日期">
+            </el-date-picker>
+        </el-form-item>
+        <el-form-item label="发行总量：" prop="stock">
+            <div class="display-flex">
+                <el-input v-positive-integer type="number" v-model="detailData.stock" style="width:170px;" placeholder="请输入发行总量" min="1"
+                    step="1">
+                    <template slot="append">张</template>
+                </el-input>
+            </div>
+        </el-form-item>
+
+        <el-form-item label="卡密类型：" prop="pwd_type">
+            <el-radio-group v-model="detailData.pwd_type">
+                <el-radio label="alnum">数字和字母</el-radio>
+                <el-radio label="alpha">字母</el-radio>
+                <el-radio label="numeric">数字</el-radio>
+                <el-radio label="nozero">无0数字</el-radio>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="卡密长度：" prop="pwd_len">
+            <div class="display-flex">
+                <el-input v-positive-integer type="number" v-model="detailData.pwd_len" style="width:170px;" placeholder="请输入卡密长度" min="4"
+                          step="1">
+                    <template slot="append">位</template>
+                </el-input>
+            </div>
+        </el-form-item>
+
+        <el-form-item label="备注：">
+            <el-input type="input" v-model="detailData.remark" placeholder="仅后端显示，用于区分不同批次卡密(最多可输入十个字)"
+                      maxlength="11"></el-input>
+        </el-form-item>
+
+    </el-form>
+    <div class="dialog-footer display-flex">
+        <div @click="submit" class="dialog-cancel-btn display-flex-c cursor-pointer">取消</div>
+        <div @click="submit('yes','detailData')" class="dialog-define-btn display-flex-c cursor-pointer">确定</div>
+    </div>
+</div>

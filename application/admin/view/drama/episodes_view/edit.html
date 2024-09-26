@@ -1,0 +1,171 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Site_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-site_id" data-rule="required" data-source="site/index" class="form-control selectpage" name="row[site_id]" type="text" value="{$row.site_id|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Video_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-video_id" data-rule="required" data-source="video/index" class="form-control selectpage" name="row[video_id]" type="text" value="{$row.video_id|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Episodes_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-episodes_id" data-rule="required" data-source="episodes/index" class="form-control selectpage" name="row[episodes_id]" type="text" value="{$row.episodes_id|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('H5_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-H5_user" class="form-control" name="row[H5_user]" type="number" value="{$row.H5_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('H5_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-H5_user_view" class="form-control" name="row[H5_user_view]" type="number" value="{$row.H5_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('H5_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-H5_visitor_view" class="form-control" name="row[H5_visitor_view]" type="number" value="{$row.H5_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('H5_total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-H5_total_view" class="form-control" name="row[H5_total_view]" type="number" value="{$row.H5_total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxofficialaccount_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxOfficialAccount_user" class="form-control" name="row[wxOfficialAccount_user]" type="number" value="{$row.wxOfficialAccount_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxofficialaccount_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxOfficialAccount_user_view" class="form-control" name="row[wxOfficialAccount_user_view]" type="number" value="{$row.wxOfficialAccount_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxofficialaccount_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxOfficialAccount_visitor_view" class="form-control" name="row[wxOfficialAccount_visitor_view]" type="number" value="{$row.wxOfficialAccount_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxofficialaccount_total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxOfficialAccount_total_view" class="form-control" name="row[wxOfficialAccount_total_view]" type="number" value="{$row.wxOfficialAccount_total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxminiprogram_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxMiniProgram_user" class="form-control" name="row[wxMiniProgram_user]" type="number" value="{$row.wxMiniProgram_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxminiprogram_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxMiniProgram_user_view" class="form-control" name="row[wxMiniProgram_user_view]" type="number" value="{$row.wxMiniProgram_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxminiprogram_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxMiniProgram_visitor_view" class="form-control" name="row[wxMiniProgram_visitor_view]" type="number" value="{$row.wxMiniProgram_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Wxminiprogram_total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-wxMiniProgram_total_view" class="form-control" name="row[wxMiniProgram_total_view]" type="number" value="{$row.wxMiniProgram_total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('App_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-App_user" class="form-control" name="row[App_user]" type="number" value="{$row.App_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('App_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-App_user_view" class="form-control" name="row[App_user_view]" type="number" value="{$row.App_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('App_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-App_visitor_view" class="form-control" name="row[App_visitor_view]" type="number" value="{$row.App_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('App_total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-App_total_view" class="form-control" name="row[App_total_view]" type="number" value="{$row.App_total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Douyinxcx_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-douyinxcx_user" class="form-control" name="row[douyinxcx_user]" type="number" value="{$row.douyinxcx_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Douyinxcx_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-douyinxcx_user_view" class="form-control" name="row[douyinxcx_user_view]" type="number" value="{$row.douyinxcx_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Douyinxcx_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-douyinxcx_visitor_view" class="form-control" name="row[douyinxcx_visitor_view]" type="number" value="{$row.douyinxcx_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Douyinxcx_total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-douyinxcx_total_view" class="form-control" name="row[douyinxcx_total_view]" type="number" value="{$row.douyinxcx_total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Total_user')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-total_user" class="form-control" name="row[total_user]" type="number" value="{$row.total_user|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Total_user_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-total_user_view" class="form-control" name="row[total_user_view]" type="number" value="{$row.total_user_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Total_visitor_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-total_visitor_view" class="form-control" name="row[total_visitor_view]" type="number" value="{$row.total_visitor_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Total_view')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-total_view" class="form-control" name="row[total_view]" type="number" value="{$row.total_view|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+        </div>
+    </div>
+</form>
